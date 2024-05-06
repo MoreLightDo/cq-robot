@@ -6,5 +6,12 @@
 
 #### 使用说明
 
-1.  yarn
-2.  yarn dev
+###### 安装依赖
+```javascript
+pnpm i 
+```
+
+###### 启动项目
+```javascript
+npm run start  
+```
