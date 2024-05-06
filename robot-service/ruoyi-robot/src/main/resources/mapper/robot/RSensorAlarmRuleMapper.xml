@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RSensorAlarmRuleMapper">
+    
+    <resultMap type="RSensorAlarmRule" id="RSensorAlarmRuleResult">
+        <result property="id"    column="id"    />
+        <result property="label"    column="label"    />
+        <result property="type"    column="type"    />
+        <result property="alarmValue"    column="alarm_value"    />
+        <result property="alarmUnit"    column="alarm_unit"    />
+        <result property="alarmLevel"    column="alarm_level"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRSensorAlarmRuleVo">
+        select id, label, type, alarm_value, alarm_unit, alarm_level, create_time, create_by, update_time, update_by, remark, status from r_sensor_alarm_rule
+    </sql>
+
+    <select id="selectRSensorAlarmRuleList" parameterType="RSensorAlarmRule" resultMap="RSensorAlarmRuleResult">
+        <include refid="selectRSensorAlarmRuleVo"/>
+        <where>  
+            <if test="label != null  and label != ''"> and label = #{label}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="alarmValue != null "> and alarm_value = #{alarmValue}</if>
+            <if test="alarmUnit != null  and alarmUnit != ''"> and alarm_unit = #{alarmUnit}</if>
+            <if test="alarmLevel != null "> and alarm_level = #{alarmLevel}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectRSensorAlarmRuleById" parameterType="Long" resultMap="RSensorAlarmRuleResult">
+        <include refid="selectRSensorAlarmRuleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertRSensorAlarmRule" parameterType="RSensorAlarmRule" useGeneratedKeys="true" keyProperty="id">
+        insert into r_sensor_alarm_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="label != null and label != ''">label,</if>
+            <if test="type != null">type,</if>
+            <if test="alarmValue != null">alarm_value,</if>
+            <if test="alarmUnit != null">alarm_unit,</if>
+            <if test="alarmLevel != null">alarm_level,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="label != null and label != ''">#{label},</if>
+            <if test="type != null">#{type},</if>
+            <if test="alarmValue != null">#{alarmValue},</if>
+            <if test="alarmUnit != null">#{alarmUnit},</if>
+            <if test="alarmLevel != null">#{alarmLevel},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRSensorAlarmRule" parameterType="RSensorAlarmRule">
+        update r_sensor_alarm_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="label != null and label != ''">label = #{label},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="alarmValue != null">alarm_value = #{alarmValue},</if>
+            <if test="alarmUnit != null">alarm_unit = #{alarmUnit},</if>
+            <if test="alarmLevel != null">alarm_level = #{alarmLevel},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRSensorAlarmRuleById" parameterType="Long">
+        delete from r_sensor_alarm_rule where id = #{id}
+    </delete>
+
+    <delete id="deleteRSensorAlarmRuleByIds" parameterType="String">
+        delete from r_sensor_alarm_rule where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

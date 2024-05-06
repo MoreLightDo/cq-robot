@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "rules": {
+    "color-function-notation": "legacy",
+    "at-rule-no-unknown": null,
+    "no-invalid-double-slash-comments": null,
+    "comment-empty-line-before": null
+  }
+}

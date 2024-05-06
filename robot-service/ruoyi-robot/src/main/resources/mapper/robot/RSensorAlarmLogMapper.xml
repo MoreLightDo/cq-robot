@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RSensorAlarmLogMapper">
+
+    <resultMap type="RSensorAlarmLog" id="RSensorAlarmLogResult">
+        <result property="id"    column="id"    />
+        <result property="ruleId"    column="rule_id"    />
+        <result property="triggerTime"    column="trigger_time"    />
+        <result property="message"    column="message"    />
+        <result property="alarmValue"    column="alarm_value"    />
+        <result property="alarmJson"    column="alarm_json"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="infoId" column="info_id"/>
+        <association property="rule" column="rule_id" select="com.ruoyi.robot.mapper.RSensorAlarmRuleMapper.selectRSensorAlarmRuleById"/>
+    </resultMap>
+
+    <sql id="selectRSensorAlarmLogVo">
+        select id, rule_id, info_id, trigger_time, message, alarm_value, alarm_json, create_time, create_by, update_time, update_by, remark, status from r_sensor_alarm_log
+    </sql>
+
+    <select id="selectRSensorAlarmLogList" parameterType="RSensorAlarmLog" resultMap="RSensorAlarmLogResult">
+        <include refid="selectRSensorAlarmLogVo"/>
+        <where>
+            <if test="ruleId != null "> and rule_id = #{ruleId}</if>
+            <if test="triggerTime != null "> and trigger_time = #{triggerTime}</if>
+            <if test="message != null  and message != ''"> and message = #{message}</if>
+            <if test="alarmValue != null "> and alarm_value = #{alarmValue}</if>
+            <if test="alarmJson != null  and alarmJson != ''"> and alarm_json = #{alarmJson}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+        order by trigger_time desc
+    </select>
+
+    <select id="selectRSensorAlarmLogById" parameterType="Long" resultMap="RSensorAlarmLogResult">
+        <include refid="selectRSensorAlarmLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRSensorAlarmLog" parameterType="RSensorAlarmLog" useGeneratedKeys="true" keyProperty="id">
+        insert into r_sensor_alarm_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ruleId != null">rule_id,</if>
+            <if test="triggerTime != null">trigger_time,</if>
+            <if test="message != null">message,</if>
+            <if test="alarmValue != null">alarm_value,</if>
+            <if test="alarmJson != null">alarm_json,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="infoId != null">info_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ruleId != null">#{ruleId},</if>
+            <if test="triggerTime != null">#{triggerTime},</if>
+            <if test="message != null">#{message},</if>
+            <if test="alarmValue != null">#{alarmValue},</if>
+            <if test="alarmJson != null">#{alarmJson},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="infoId != null">#{infoId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateRSensorAlarmLog" parameterType="RSensorAlarmLog">
+        update r_sensor_alarm_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ruleId != null">rule_id = #{ruleId},</if>
+            <if test="triggerTime != null">trigger_time = #{triggerTime},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="alarmValue != null">alarm_value = #{alarmValue},</if>
+            <if test="alarmJson != null">alarm_json = #{alarmJson},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRSensorAlarmLogById" parameterType="Long">
+        delete from r_sensor_alarm_log where id = #{id}
+    </delete>
+
+    <delete id="deleteRSensorAlarmLogByIds" parameterType="String">
+        delete from r_sensor_alarm_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

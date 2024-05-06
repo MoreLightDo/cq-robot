@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RRobotStateMapper">
+
+    <resultMap type="RRobotState" id="RRobotStateResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="located"    column="located"    />
+        <result property="mapping"    column="mapping"    />
+        <result property="tasking"    column="tasking"    />
+        <result property="charging"    column="charging"    />
+        <result property="emcyed"    column="emcyed"    />
+        <result property="faulted"    column="faulted"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="robotId"    column="robot_id"    />
+    </resultMap>
+
+    <sql id="selectRRobotStateVo">
+        select id, name, located, mapping, tasking, charging, emcyed, faulted, create_by, create_time, update_by, update_time, remark, status, robot_id from r_robot_state
+    </sql>
+
+    <select id="selectRRobotStateList" parameterType="RRobotState" resultMap="RRobotStateResult">
+        <include refid="selectRRobotStateVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="located != null "> and located = #{located}</if>
+            <if test="mapping != null "> and mapping = #{mapping}</if>
+            <if test="tasking != null "> and tasking = #{tasking}</if>
+            <if test="charging != null "> and charging = #{charging}</if>
+            <if test="emcyed != null "> and emcyed = #{emcyed}</if>
+            <if test="faulted != null "> and faulted = #{faulted}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="robotId != null "> and robot_id = #{robotId}</if>
+        </where>
+    </select>
+
+    <select id="selectRRobotStateById" parameterType="Long" resultMap="RRobotStateResult">
+        <include refid="selectRRobotStateVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectNewstRRobotStateByRobotId" resultMap="RRobotStateResult">
+        <include refid="selectRRobotStateVo"/>
+        where robot_id = #{id} order by create_time desc limit 0,1
+    </select>
+
+    <insert id="insertRRobotState" parameterType="RRobotState" useGeneratedKeys="true" keyProperty="id">
+        insert into r_robot_state
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="located != null">located,</if>
+            <if test="mapping != null">mapping,</if>
+            <if test="tasking != null">tasking,</if>
+            <if test="charging != null">charging,</if>
+            <if test="emcyed != null">emcyed,</if>
+            <if test="faulted != null">faulted,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="robotId != null">robot_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="located != null">#{located},</if>
+            <if test="mapping != null">#{mapping},</if>
+            <if test="tasking != null">#{tasking},</if>
+            <if test="charging != null">#{charging},</if>
+            <if test="emcyed != null">#{emcyed},</if>
+            <if test="faulted != null">#{faulted},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="robotId != null">#{robotId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRRobotState" parameterType="RRobotState">
+        update r_robot_state
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="located != null">located = #{located},</if>
+            <if test="mapping != null">mapping = #{mapping},</if>
+            <if test="tasking != null">tasking = #{tasking},</if>
+            <if test="charging != null">charging = #{charging},</if>
+            <if test="emcyed != null">emcyed = #{emcyed},</if>
+            <if test="faulted != null">faulted = #{faulted},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="robotId != null">robot_id = #{robotId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRRobotStateById" parameterType="Long">
+        delete from r_robot_state where id = #{id}
+    </delete>
+
+    <delete id="deleteRRobotStateByIds" parameterType="String">
+        delete from r_robot_state where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,67 @@
+.waring-page {
+  display: flex;
+  height: 100vh;
+  background-color: rgb(46, 40, 60);
+
+  .w {
+    width: 100%;
+  }
+
+  .t {
+    position: absolute;
+    top: 10px;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .left,
+  .right {
+    width: 20%;
+    margin: 30px;
+
+    .chart {
+      height: 300px;
+      width: 100%;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .video {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin-bottom: 30px;
+      background: #000;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .column {
+      display: flex;
+
+      .chart {
+        margin: 0 20px;
+        height: 400px;
+        width: 100%;
+      }
+    }
+  }
+
+  .right {
+    width: 20%;
+  }
+
+  .column-wrap {
+    flex: 1;
+  }
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RRobotEmcyMapper">
+
+    <resultMap type="RRobotEmcy" id="RRobotEmcyResult">
+        <result property="id"    column="id"    />
+        <result property="robotId"    column="robot_id"    />
+        <result property="emcyed"    column="emcyed"    />
+        <result property="hardware"    column="hardware"    />
+        <result property="software"    column="software"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRRobotEmcyVo">
+        select id, robot_id, emcyed, hardware, software, create_by, create_time, update_by, update_time, remark, status from r_robot_emcy
+    </sql>
+
+    <select id="selectRRobotEmcyList" parameterType="RRobotEmcy" resultMap="RRobotEmcyResult">
+        <include refid="selectRRobotEmcyVo"/>
+        <where>
+            <if test="robotId != null "> and robot_id = #{robotId}</if>
+            <if test="emcyed != null "> and emcyed = #{emcyed}</if>
+            <if test="hardware != null "> and hardware = #{hardware}</if>
+            <if test="software != null "> and software = #{software}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectRRobotEmcyById" parameterType="Long" resultMap="RRobotEmcyResult">
+        <include refid="selectRRobotEmcyVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectNewstRRobotEmcyByRobotId" resultMap="RRobotEmcyResult">
+        <include refid="selectRRobotEmcyVo"/>
+        where robot_id = #{id} order by create_time desc limit 0,1
+    </select>
+
+    <insert id="insertRRobotEmcy" parameterType="RRobotEmcy" useGeneratedKeys="true" keyProperty="id">
+        insert into r_robot_emcy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">robot_id,</if>
+            <if test="emcyed != null">emcyed,</if>
+            <if test="hardware != null">hardware,</if>
+            <if test="software != null">software,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">#{robotId},</if>
+            <if test="emcyed != null">#{emcyed},</if>
+            <if test="hardware != null">#{hardware},</if>
+            <if test="software != null">#{software},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRRobotEmcy" parameterType="RRobotEmcy">
+        update r_robot_emcy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="robotId != null">robot_id = #{robotId},</if>
+            <if test="emcyed != null">emcyed = #{emcyed},</if>
+            <if test="hardware != null">hardware = #{hardware},</if>
+            <if test="software != null">software = #{software},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRRobotEmcyById" parameterType="Long">
+        delete from r_robot_emcy where id = #{id}
+    </delete>
+
+    <delete id="deleteRRobotEmcyByIds" parameterType="String">
+        delete from r_robot_emcy where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

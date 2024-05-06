@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RSensorLogMapper">
+
+    <resultMap type="RSensorLog" id="RSensorLogResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <collection property="sensorInfos" column="id" select="com.ruoyi.robot.mapper.RSensorInfoMapper.selectRSensorInfoListByLogId"/>
+    </resultMap>
+
+    <sql id="selectRSensorLogVo">
+        select id, name, create_time, create_by, update_by, update_time, remark, status from r_sensor_log
+    </sql>
+
+    <select id="selectRSensorLogList" parameterType="RSensorLog" resultMap="RSensorLogResult">
+        <include refid="selectRSensorLogVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectRSensorLogById" parameterType="Long" resultMap="RSensorLogResult">
+        <include refid="selectRSensorLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRSensorLog" parameterType="RSensorLog" useGeneratedKeys="true" keyProperty="id">
+        insert into r_sensor_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRSensorLog" parameterType="RSensorLog">
+        update r_sensor_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRSensorLogById" parameterType="Long">
+        delete from r_sensor_log where id = #{id}
+    </delete>
+
+    <delete id="deleteRSensorLogByIds" parameterType="String">
+        delete from r_sensor_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

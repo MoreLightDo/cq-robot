@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RSensorInfoMapper">
+
+    <resultMap type="RSensorInfo" id="RSensorInfoResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="isOnline"    column="is_online"    />
+        <result property="value"    column="value"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="logId" column="log_id"/>
+    </resultMap>
+
+    <sql id="selectRSensorInfoVo">
+        select id, type, is_online, value, create_by,log_id, create_time, update_by, update_time, remark, status from r_sensor_info
+    </sql>
+
+    <select id="selectRSensorInfoList" parameterType="RSensorInfo" resultMap="RSensorInfoResult">
+        <include refid="selectRSensorInfoVo"/>
+        <where>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="isOnline != null "> and is_online = #{isOnline}</if>
+            <if test="value != null "> and value = #{value}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="logId != null"> and log_id = #{logId}</if>
+        </where>
+    </select>
+
+    <select id="selectRSensorInfoListByLogId" parameterType="long" resultMap="RSensorInfoResult">
+        <include refid="selectRSensorInfoVo"/>
+        where log_id = #{id}
+    </select>
+
+    <select id="selectRSensorInfoById" parameterType="Long" resultMap="RSensorInfoResult">
+        <include refid="selectRSensorInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRSensorInfo" parameterType="RSensorInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into r_sensor_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="isOnline != null">is_online,</if>
+            <if test="value != null">value,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="logId != null">log_id,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="isOnline != null">#{isOnline},</if>
+            <if test="value != null">#{value},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="logId != null">#{logId},</if>
+            sysdate()
+         </trim>
+    </insert>
+    <insert id="insertRSensorInfos" useGeneratedKeys="true" keyProperty="id" parameterType="List">
+        insert into r_sensor_info
+        (type,is_online,value,create_time,log_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.type}, #{item.isOnline}, #{item.value},sysdate(),#{item.logId})
+        </foreach>
+    </insert>
+
+    <update id="updateRSensorInfo" parameterType="RSensorInfo">
+        update r_sensor_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="isOnline != null">is_online = #{isOnline},</if>
+            <if test="value != null">value = #{value},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            create_time = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRSensorInfoById" parameterType="Long">
+        delete from r_sensor_info where id = #{id}
+    </delete>
+
+    <delete id="deleteRSensorInfoByIds" parameterType="String">
+        delete from r_sensor_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

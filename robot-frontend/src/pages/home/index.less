@@ -1,0 +1,69 @@
+.home-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* yarn start时图片资源为空白，待处理 */
+  background-image: url('../../assets/login/login-mask.png');
+  background-size: cover;
+  box-sizing: border-box;
+
+  /* 暂时使用img代替background-image */
+  .home-page-background {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .home-page-content {
+    padding: 0 30px 30px;
+    width: 100%;
+    flex: 1;
+    overflow: auto;
+
+    .home-page-center-content {
+      display: flex;
+      width: 100%;
+      margin-top: 24px;
+
+      .content-left {
+        width: 26%;
+
+        .location {
+          color: #fff;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          height: 58px;
+
+          img {
+            width: 16px;
+            height: 20px;
+            margin-right: 10px;
+            flex-basis: 16px;
+          }
+
+          span {
+            line-height: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+
+      .content-center {
+        flex: 1;
+        height: 600px;
+        border: 1px solid #34dcfc;
+        margin: 0 30px;
+      }
+
+      .content-right {
+        width: 26%;
+        height: 400px;
+      }
+    }
+  }
+}

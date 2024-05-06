@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RRobotCornJobMapper">
+
+    <resultMap type="RRobotCornJob" id="RRobotCornJobResult">
+        <result property="id"    column="id"    />
+        <result property="taskName"    column="task_name"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="status"    column="status"    />
+        <result property="jobName"    column="job_name"    />
+        <result property="jobCorn"    column="job_corn"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="triggerTimes"    column="trigger_times"    />
+        <result property="remark"    column="remark"    />
+        <result property="lastTriggerTime" column="last_trigger_time" />
+    </resultMap>
+
+    <sql id="selectRRobotCornJobVo">
+        select id, task_name, task_id, status, job_name, job_corn, create_time, trigger_times, remark,last_trigger_time from r_robot_corn_job
+    </sql>
+
+    <select id="selectRRobotCornJobList" parameterType="RRobotCornJob" resultMap="RRobotCornJobResult">
+        <include refid="selectRRobotCornJobVo"/>
+        <where>
+            <if test="taskName != null  and taskName != ''"> and task_name like concat('%', #{taskName}, '%')</if>
+            <if test="taskId != null  and taskId != ''"> and task_id = #{taskId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="jobName != null  and jobName != ''"> and job_name like concat('%', #{jobName}, '%')</if>
+            <if test="jobCorn != null  and jobCorn != ''"> and job_corn = #{jobCorn}</if>
+            <if test="triggerTimes != null "> and trigger_times = #{triggerTimes}</if>
+        </where>
+    </select>
+
+    <select id="selectRRobotCornJobById" parameterType="Long" resultMap="RRobotCornJobResult">
+        <include refid="selectRRobotCornJobVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRRobotCornJob" parameterType="RRobotCornJob" useGeneratedKeys="true" keyProperty="id">
+        insert into r_robot_corn_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskName != null and taskName != ''">task_name,</if>
+            <if test="taskId != null">task_id,</if>
+            <if test="status != null">status,</if>
+            <if test="jobName != null">job_name,</if>
+            <if test="jobCorn != null">job_corn,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="triggerTimes != null">trigger_times,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskName != null and taskName != ''">#{taskName},</if>
+            <if test="taskId != null">#{taskId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="jobName != null">#{jobName},</if>
+            <if test="jobCorn != null">#{jobCorn},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="triggerTimes != null">#{triggerTimes},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRRobotCornJob" parameterType="RRobotCornJob">
+        update r_robot_corn_job
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskName != null and taskName != ''">task_name = #{taskName},</if>
+            <if test="taskId != null">task_id = #{taskId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="jobName != null">job_name = #{jobName},</if>
+            <if test="jobCorn != null">job_corn = #{jobCorn},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="triggerTimes != null">trigger_times = #{triggerTimes},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="lastTriggerTime != null">last_trigger_time = #{lastTriggerTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRRobotCornJobById" parameterType="Long">
+        delete from r_robot_corn_job where id = #{id}
+    </delete>
+
+    <delete id="deleteRRobotCornJobByIds" parameterType="String">
+        delete from r_robot_corn_job where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

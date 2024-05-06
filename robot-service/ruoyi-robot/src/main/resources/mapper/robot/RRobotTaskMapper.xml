@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RRobotTaskMapper">
+
+    <resultMap type="RRobotTask" id="RRobotTaskResult">
+        <result property="id"    column="id"    />
+        <result property="robotId"    column="robot_id"    />
+        <result property="tasking"    column="tasking"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="name"    column="name"    />
+        <result property="ts"    column="ts"    />
+        <result property="state"    column="state"    />
+        <result property="progress"    column="progress"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRRobotTaskVo">
+        select id, robot_id, tasking, task_id, name, ts, state, progress, create_by, create_time, update_by, update_time, remark, status from r_robot_task
+    </sql>
+
+    <select id="selectRRobotTaskList" parameterType="RRobotTask" resultMap="RRobotTaskResult">
+        <include refid="selectRRobotTaskVo"/>
+        <where>
+            <if test="robotId != null "> and robot_id = #{robotId}</if>
+            <if test="tasking != null "> and tasking = #{tasking}</if>
+            <if test="taskId != null  and taskId != ''"> and task_id = #{taskId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="ts != null "> and ts = #{ts}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="progress != null "> and progress = #{progress}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectRRobotTaskById" parameterType="Long" resultMap="RRobotTaskResult">
+        <include refid="selectRRobotTaskVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectNewestRRobotTaskById" parameterType="Long" resultMap="RRobotTaskResult">
+        <include refid="selectRRobotTaskVo"/>
+        where robot_id = #{id} order by create_time desc limit 0,1
+    </select>
+
+    <insert id="insertRRobotTask" parameterType="RRobotTask" useGeneratedKeys="true" keyProperty="id">
+        insert into r_robot_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">robot_id,</if>
+            <if test="tasking != null">tasking,</if>
+            <if test="taskId != null">task_id,</if>
+            <if test="name != null">name,</if>
+            <if test="ts != null">ts,</if>
+            <if test="state != null">state,</if>
+            <if test="progress != null">progress,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">#{robotId},</if>
+            <if test="tasking != null">#{tasking},</if>
+            <if test="taskId != null">#{taskId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="ts != null">#{ts},</if>
+            <if test="state != null">#{state},</if>
+            <if test="progress != null">#{progress},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRRobotTask" parameterType="RRobotTask">
+        update r_robot_task
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="robotId != null">robot_id = #{robotId},</if>
+            <if test="tasking != null">tasking = #{tasking},</if>
+            <if test="taskId != null">task_id = #{taskId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="ts != null">ts = #{ts},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="progress != null">progress = #{progress},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRRobotTaskById" parameterType="Long">
+        delete from r_robot_task where id = #{id}
+    </delete>
+
+    <delete id="deleteRRobotTaskByIds" parameterType="String">
+        delete from r_robot_task where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RRobotInfoMapper">
+
+    <resultMap type="RRobotInfo" id="RRobotInfoResult">
+        <result property="id"    column="id"    />
+        <result property="robotId"    column="robot_id"    />
+        <result property="online"    column="online"    />
+        <result property="r1Current"    column="r1_current"    />
+        <result property="r2Current"    column="r2_current"    />
+        <result property="r3Current"    column="r3_current"    />
+        <result property="r4Current"    column="r4_current"    />
+        <result property="r5Current"    column="r5_current"    />
+        <result property="r6Current"    column="r6_current"    />
+        <result property="r1Voltage"    column="r1_voltage"    />
+        <result property="r2Voltage"    column="r2_voltage"    />
+        <result property="r3Voltage"    column="r3_voltage"    />
+        <result property="r4Voltage"    column="r4_voltage"    />
+        <result property="r5Voltage"    column="r5_voltage"    />
+        <result property="r6Voltage"    column="r6_voltage"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRRobotInfoVo">
+        select id, robot_id, online, r1_current, r2_current, r3_current, r4_current, r5_current, r6_current, r1_voltage, r2_voltage, r3_voltage, r4_voltage, r5_voltage, r6_voltage, create_by, create_time, update_by, update_time, remark, status from r_robot_info
+    </sql>
+
+    <select id="selectRRobotInfoList" parameterType="RRobotInfo" resultMap="RRobotInfoResult">
+        <include refid="selectRRobotInfoVo"/>
+        <where>
+            <if test="robotId != null "> and robot_id = #{robotId}</if>
+            <if test="online != null "> and online = #{online}</if>
+            <if test="r1Current != null "> and r1_current = #{r1Current}</if>
+            <if test="r2Current != null "> and r2_current = #{r2Current}</if>
+            <if test="r3Current != null "> and r3_current = #{r3Current}</if>
+            <if test="r4Current != null "> and r4_current = #{r4Current}</if>
+            <if test="r5Current != null "> and r5_current = #{r5Current}</if>
+            <if test="r6Current != null "> and r6_current = #{r6Current}</if>
+            <if test="r1Voltage != null "> and r1_voltage = #{r1Voltage}</if>
+            <if test="r2Voltage != null "> and r2_voltage = #{r2Voltage}</if>
+            <if test="r3Voltage != null "> and r3_voltage = #{r3Voltage}</if>
+            <if test="r4Voltage != null "> and r4_voltage = #{r4Voltage}</if>
+            <if test="r5Voltage != null "> and r5_voltage = #{r5Voltage}</if>
+            <if test="r6Voltage != null "> and r6_voltage = #{r6Voltage}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectRRobotInfoById" parameterType="Long" resultMap="RRobotInfoResult">
+        <include refid="selectRRobotInfoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRRobotInfo" parameterType="RRobotInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into r_robot_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">robot_id,</if>
+            <if test="online != null">online,</if>
+            <if test="r1Current != null">r1_current,</if>
+            <if test="r2Current != null">r2_current,</if>
+            <if test="r3Current != null">r3_current,</if>
+            <if test="r4Current != null">r4_current,</if>
+            <if test="r5Current != null">r5_current,</if>
+            <if test="r6Current != null">r6_current,</if>
+            <if test="r1Voltage != null">r1_voltage,</if>
+            <if test="r2Voltage != null">r2_voltage,</if>
+            <if test="r3Voltage != null">r3_voltage,</if>
+            <if test="r4Voltage != null">r4_voltage,</if>
+            <if test="r5Voltage != null">r5_voltage,</if>
+            <if test="r6Voltage != null">r6_voltage,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">#{robotId},</if>
+            <if test="online != null">#{online},</if>
+            <if test="r1Current != null">#{r1Current},</if>
+            <if test="r2Current != null">#{r2Current},</if>
+            <if test="r3Current != null">#{r3Current},</if>
+            <if test="r4Current != null">#{r4Current},</if>
+            <if test="r5Current != null">#{r5Current},</if>
+            <if test="r6Current != null">#{r6Current},</if>
+            <if test="r1Voltage != null">#{r1Voltage},</if>
+            <if test="r2Voltage != null">#{r2Voltage},</if>
+            <if test="r3Voltage != null">#{r3Voltage},</if>
+            <if test="r4Voltage != null">#{r4Voltage},</if>
+            <if test="r5Voltage != null">#{r5Voltage},</if>
+            <if test="r6Voltage != null">#{r6Voltage},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            sysdate()
+         </trim>
+    </insert>
+
+    <update id="updateRRobotInfo" parameterType="RRobotInfo">
+        update r_robot_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="robotId != null">robot_id = #{robotId},</if>
+            <if test="online != null">online = #{online},</if>
+            <if test="r1Current != null">r1_current = #{r1Current},</if>
+            <if test="r2Current != null">r2_current = #{r2Current},</if>
+            <if test="r3Current != null">r3_current = #{r3Current},</if>
+            <if test="r4Current != null">r4_current = #{r4Current},</if>
+            <if test="r5Current != null">r5_current = #{r5Current},</if>
+            <if test="r6Current != null">r6_current = #{r6Current},</if>
+            <if test="r1Voltage != null">r1_voltage = #{r1Voltage},</if>
+            <if test="r2Voltage != null">r2_voltage = #{r2Voltage},</if>
+            <if test="r3Voltage != null">r3_voltage = #{r3Voltage},</if>
+            <if test="r4Voltage != null">r4_voltage = #{r4Voltage},</if>
+            <if test="r5Voltage != null">r5_voltage = #{r5Voltage},</if>
+            <if test="r6Voltage != null">r6_voltage = #{r6Voltage},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRRobotInfoById" parameterType="Long">
+        delete from r_robot_info where id = #{id}
+    </delete>
+
+    <delete id="deleteRRobotInfoByIds" parameterType="String">
+        delete from r_robot_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

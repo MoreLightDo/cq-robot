@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RRobotBatteryMapper">
+
+    <resultMap type="RRobotBattery" id="RRobotBatteryResult">
+        <result property="id"    column="id"    />
+        <result property="robotId"    column="robot_id"    />
+        <result property="soc"    column="soc"    />
+        <result property="voltage"    column="voltage"    />
+        <result property="current"    column="current"    />
+        <result property="charging"    column="charging"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRRobotBatteryVo">
+        select id, robot_id, soc, voltage, current, charging, create_by, create_time, update_by, update_time, remark, status from r_robot_battery
+    </sql>
+
+    <select id="selectRRobotBatteryList" parameterType="RRobotBattery" resultMap="RRobotBatteryResult">
+        <include refid="selectRRobotBatteryVo"/>
+        <where>
+            <if test="robotId != null "> and robot_id = #{robotId}</if>
+            <if test="soc != null "> and soc = #{soc}</if>
+            <if test="voltage != null "> and voltage = #{voltage}</if>
+            <if test="current != null "> and current = #{current}</if>
+            <if test="charging != null "> and charging = #{charging}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectRRobotBatteryById" parameterType="Long" resultMap="RRobotBatteryResult">
+        <include refid="selectRRobotBatteryVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectNewStrRobotBatteryByRobotId" resultMap="RRobotBatteryResult">
+        <include refid="selectRRobotBatteryVo"/>
+        where robot_id = #{id} order by create_time desc limit 0,1
+    </select>
+
+    <insert id="insertRRobotBattery" parameterType="RRobotBattery" useGeneratedKeys="true" keyProperty="id">
+        insert into r_robot_battery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">robot_id,</if>
+            <if test="soc != null">soc,</if>
+            <if test="voltage != null">voltage,</if>
+            <if test="current != null">current,</if>
+            <if test="charging != null">charging,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="robotId != null">#{robotId},</if>
+            <if test="soc != null">#{soc},</if>
+            <if test="voltage != null">#{voltage},</if>
+            <if test="current != null">#{current},</if>
+            <if test="charging != null">#{charging},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            sysdate()
+         </trim>
+    </insert>
+
+    <update id="updateRRobotBattery" parameterType="RRobotBattery">
+        update r_robot_battery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="robotId != null">robot_id = #{robotId},</if>
+            <if test="soc != null">soc = #{soc},</if>
+            <if test="voltage != null">voltage = #{voltage},</if>
+            <if test="current != null">current = #{current},</if>
+            <if test="charging != null">charging = #{charging},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            update_time = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRRobotBatteryById" parameterType="Long">
+        delete from r_robot_battery where id = #{id}
+    </delete>
+
+    <delete id="deleteRRobotBatteryByIds" parameterType="String">
+        delete from r_robot_battery where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

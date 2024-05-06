@@ -1,0 +1,54 @@
+.video-area {
+  width: 100%;
+  height: 387px;
+  position: relative;
+  margin-top: 30px;
+  overflow: hidden;
+
+  .video-area-background {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .video-select-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 44% 44%;
+    row-gap: 30px;
+    column-gap: 20px;
+    margin-top: 39px;
+    padding-left: 4%;
+
+    .grid-item {
+      height: 150px;
+      font-size: 12px;
+      line-height: 12px;
+      flex-direction: column;
+      display: flex;
+      cursor: pointer;
+      color: #fff;
+
+      .video {
+        display: block;
+        margin-top: 15px;
+        width: 100%;
+        height: 125px;
+        flex: 1;
+      }
+    }
+
+    .item-active,
+    .grid-item:hover {
+      color: #34dcfc;
+
+      .video {
+        border: 1px solid #34dcfc;
+      }
+    }
+  }
+}

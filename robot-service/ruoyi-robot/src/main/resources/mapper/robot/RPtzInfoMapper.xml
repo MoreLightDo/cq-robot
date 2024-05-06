@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.robot.mapper.RPtzInfoMapper">
+    
+    <resultMap type="RPtzInfo" id="RPtzInfoResult">
+        <result property="id"    column="id"    />
+        <result property="online"    column="online"    />
+        <result property="level"    column="level"    />
+        <result property="vertical"    column="vertical"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectRPtzInfoVo">
+        select id, online, level, vertical, create_by, create_time, update_by, update_time, remark, status from r_ptz_info
+    </sql>
+
+    <select id="selectRPtzInfoList" parameterType="RPtzInfo" resultMap="RPtzInfoResult">
+        <include refid="selectRPtzInfoVo"/>
+        <where>  
+            <if test="online != null "> and online = #{online}</if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="vertical != null "> and vertical = #{vertical}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectRPtzInfoById" parameterType="Long" resultMap="RPtzInfoResult">
+        <include refid="selectRPtzInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertRPtzInfo" parameterType="RPtzInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into r_ptz_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="online != null">online,</if>
+            <if test="level != null">level,</if>
+            <if test="vertical != null">vertical,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="online != null">#{online},</if>
+            <if test="level != null">#{level},</if>
+            <if test="vertical != null">#{vertical},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRPtzInfo" parameterType="RPtzInfo">
+        update r_ptz_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="online != null">online = #{online},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="vertical != null">vertical = #{vertical},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRPtzInfoById" parameterType="Long">
+        delete from r_ptz_info where id = #{id}
+    </delete>
+
+    <delete id="deleteRPtzInfoByIds" parameterType="String">
+        delete from r_ptz_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
