@@ -13,7 +13,6 @@ const columns :ColumnsType<AlarmLog> = [
   {
     title: '序号',
     dataIndex: 'index',
-    key: 'id',
     width: 100,
   },
   {
@@ -22,37 +21,31 @@ const columns :ColumnsType<AlarmLog> = [
     render:(value)=>{
       return dayjs(value).format("YYYY-MM-DD HH:mm:ss")
     },
-    key: 'id',
     width: 200,
   },
   {
     title: '巡检项',
     dataIndex: ['rule','label'],
-    key: 'id',
     width: 200,
   },
   {
     title: '参数',
     dataIndex: 'alarmValue',
-    key: 'id',
     width: 100,
   },
   {
     title: '巡检结果',
     dataIndex: 'message',
-    key: 'id',
     width: 200,
   },
   {
     title: '预警等级',
     dataIndex: ['rule','alarmLevel'],
-    key: 'id',
     width: 100,
   },
   {
     title: '操作',
     dataIndex: 'address4',
-    key: 'id',
     width: 200,
   },
 ];
@@ -94,6 +87,7 @@ export default function WarningInfoList() {
     <div className="warning-info">
       <img alt="warningInfo" src={warningInfo} className="warning-info-background" />
       <Table
+        rowKey={(item) => item.id}
         dataSource={data}
         columns={columns}
         pagination={false}

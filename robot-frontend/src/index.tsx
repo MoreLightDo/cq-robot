@@ -12,6 +12,7 @@ import './styles/common.css';
 
 import store from "./redux/store";
 
+window.__DEV__ = process.env.NODE_ENV !== 'production';
 
 const App = () => (
         <Provider store={store}>

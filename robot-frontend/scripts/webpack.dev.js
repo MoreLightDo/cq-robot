@@ -8,6 +8,9 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
+    client: {
+      overlay: false,
+    },
     port: 9000, // 指定端口，默认是8080
     open: true, // 打开默认浏览器
     hot: true, // 热更新
@@ -18,8 +21,8 @@ module.exports = merge(common, {
       publicPath: '/dist',
     },
     proxy: {
-      '/dutang': {
-        target: 'https://localhost:8080',
+      '/': {
+        target: 'http://47.120.19.177:8080/',  // 任航
         changeOrigin: true,
       },
     },
