@@ -9,6 +9,9 @@ const isDev = process.env.NODE_ENV !== 'production';
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@': path.resolve(__dirname, '../src/'),
+    },
   },
   entry: {
     app: path.resolve(__dirname, '../src/index.tsx'),
@@ -16,6 +19,7 @@ module.exports = {
   output: {
     filename: `[name]${isDev ? '' : '.[hash:8]'}.js`,
     path: path.resolve(__dirname, '../dist'),
+    assetModuleFilename: 'images/[name].[hash].[ext]'
   },
   module: {
     rules: [
@@ -39,12 +43,9 @@ module.exports = {
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            // css模块化与antd按需加载冲突，待处理
-            // options: {
-            //   modules: {
-            //     localIdentName: '[path][name]__[local]--[hash:base64:5]',
-            //   },
-            // },
+            options: {
+              importLoaders: 2,
+            },
           },
           {
             loader: 'less-loader',
@@ -55,16 +56,9 @@ module.exports = {
         ],
       },
       {
-        test: /.(png|jpg|jpeg|svg|gif|bmp|webp)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10240,
-            },
-          },
-        ],
-      },
+        test: /.(png|jpe?g|svg|gif|bmp|webp)$/i,
+        type: 'asset/resource',
+      }
     ],
   },
   plugins: [
