@@ -1,0 +1,53 @@
+.monitor-pannel {
+  background-image: url('@/assets/monitorPage/monitor-pannel-border.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0 20px 20px;
+
+  .monitor-panner-header {
+    height: 55px;
+    margin-bottom: 20px;
+
+    .mointor-panner-title-area {
+      height: 50px;
+      display: flex;
+
+      span {
+        font-size: 20px;
+        color: #34DCFC;
+        margin-top: 13px;
+      }
+
+      a {
+        color: #C7E4FD;
+        font-size: 14px;
+        margin-top: 17px;
+        margin-left: auto;
+        cursor: pointer;
+
+        &:active {
+          color: #34DCFC;
+        }
+
+        // 伪元素右箭头
+        &::after {
+          margin-left: 6px;
+          content: '';
+          display: inline-block;
+          width: 0;
+          height: 0;
+          border: solid #C7E4FD 5px;
+          border-right: none;
+          border-top-color: #0000;
+          border-bottom-color: #0000;
+        }
+      }
+    }
+
+    .header-bottom-line {
+      width: 100%;
+      height: 7px;
+      display: block;
+    }
+  }
+}

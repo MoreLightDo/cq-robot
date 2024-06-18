@@ -6,6 +6,3 @@ node_modules
 
 # 杂项
 .DS_Store
-
-# lock文件
-pnpm-lock.yaml
