@@ -1,0 +1,193 @@
+.page-button {
+  display: inline-block;
+  line-height: 30px;
+  color: #fff;
+  padding: 0 14px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #092483;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    color: #00BDFF;
+  }
+
+  &:active {
+    color: #0f5eb2;
+  }
+}
+
+.instrument-page {
+  height: calc(100vh);
+  background-image: url('@/assets/common/app-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+
+  .instrument-page-header {
+    height: 93px;
+    background-image: url('@/assets/instrumentPage/headerImg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px 30px 20px 20px;
+    box-sizing: border-box;
+    background-position: 50%;
+    display: flex;
+
+    .header-left-elements{
+      margin-left: 20px;
+      height: 30px;
+      line-height: 30px;
+
+      .data-and-time-item {
+        margin-right: 40px;
+        color: #00BDFF;
+        font-size: 16px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .header-right-elements {
+      margin-left: auto;
+      height: 30px;
+      line-height: 30px;
+
+      a {
+        margin-left: 10px;
+      }
+
+      .setting-icon {
+        margin-left: 28px;
+        width: 22px;
+        height: 22px;
+        vertical-align: text-top;
+      }
+    }
+  }
+
+  .instrument-page-body {
+    margin-top: 20px;
+    overflow: auto;
+    flex: 1;
+    display: flex;
+    padding: 0 20px;
+
+    .left-area {
+      // 减去15px对应title文字行号的一半
+      // overflow触发bfc
+      .left-area-pannel {
+        box-sizing: border-box;
+        padding: 0 10px;
+        width: 656px;
+        background-image: url('../../assets/instrumentPage/backgroundBorder.png');
+        background-size: 99% calc(100% - 15px);
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        position: relative;
+        margin-bottom: 15px;
+        overflow: auto;
+
+        .title {
+          position: absolute;
+          left: 40px;
+          top: 0;
+          font-size: 20px;
+          line-height: 30px;
+          color: #34DCFC;
+        }
+      }
+
+      .pannel-state {
+        display: flex;
+        margin-top: 38px;
+
+        .item {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          img {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 10px;
+          }
+
+          .text {
+            font-size: 16px;
+            color: #06B2F1;
+            margin-bottom: 7px;
+          }
+
+          .value {
+            font-size: 14px;
+            color: #fff;
+          }
+        }
+      }
+
+      .realtime-info-date-table {
+        margin-top: 30px;
+        height: calc(100% - 50px);
+        overflow: auto;
+
+        .ant-table-thead .ant-table-cell {
+          color: #34DCFC;
+          font-size: 16px;
+          background-color: #142653;
+          box-sizing: border-box;
+          padding: 0 initial;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+
+        .ant-table-thead > tr > th {
+          border: none;
+        }
+
+        .ant-table-tbody .ant-table-cell {
+          color: #fff;
+          font-size: 14px;
+          box-sizing: border-box;
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+
+        .ant-table-tbody tr:nth-child(2n + 1) {
+          background-color: #061949;
+        }
+
+        .ant-table-tbody tr:nth-child(2n) {
+          background-color: #142653;
+        }
+
+        .ant-table-tbody > tr > td {
+          border: none;
+        }
+
+        .ant-table-tbody tr:hover {
+          & > td {
+            background-color: #1d3777!important;
+          }
+        }
+      }
+    }
+
+    .right-area {
+
+    }
+
+    .bottom-area {
+
+    }
+  }
+}

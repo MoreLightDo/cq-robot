@@ -1,3 +1,5 @@
+// 监控平台页面相关接口
+
 // 视频监控列表
 export function getVideoList(params) {
   // mock

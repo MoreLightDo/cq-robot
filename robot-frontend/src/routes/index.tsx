@@ -5,7 +5,8 @@ import history from '../utils/history';
 const Login = React.lazy(() => import('../pages/login'));
 const EditPassword = React.lazy(() => import('../pages/editPassword'));
 const CenterPage = React.lazy(() => import('../pages/home'));
-const Instrument = React.lazy(() => import('../pages/instrument'));
+const InstrumentPannel = React.lazy(() => import('../pages/instrumentPannel'));
+const MonitorPlatForm = React.lazy(() => import('../pages/instrument'));
 
 export default function RootRoute() {
   return (
@@ -17,7 +18,9 @@ export default function RootRoute() {
           <Route path="/password" element={<EditPassword />} />
           <Route path="/center" element={<CenterPage />} /> */}
           {/* 仪表识别页面 */}
-          <Route path="/instrument" element={<Instrument />} />
+          <Route path="/instrument" element={<InstrumentPannel />} />
+          {/* 监控平台页面 */}
+          <Route path="/monitorPlatform" element={<MonitorPlatForm />} />
           {/* <Route path="/" element={<Login />} /> */}
         </Routes>
       </React.Suspense>
