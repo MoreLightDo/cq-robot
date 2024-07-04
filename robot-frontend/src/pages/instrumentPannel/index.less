@@ -78,8 +78,11 @@
     margin-top: 20px;
     overflow: auto;
     flex: 1;
-    display: flex;
     padding: 0 20px;
+
+    .instrument-page-body-top {
+      display: flex;
+    }
 
     .left-area {
       // 减去15px对应title文字行号的一半
@@ -187,7 +190,73 @@
     }
 
     .bottom-area {
+      height: 300px;
+      background-image: url('../../assets/instrumentPage/analyze.png');
+      background-size: 99% calc(100% - 15px);
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      position: relative;
+      overflow: auto;
 
+      .title {
+        position: absolute;
+        left: 40px;
+        top: 0;
+        font-size: 20px;
+        line-height: 30px;
+        color: #34DCFC;
+      }
+
+      .bottom-area-content {
+        margin-top: 45px;
+        margin-left: 12px;
+        width: calc(100% - 22px);
+        height: calc(100% - 50px);
+        overflow: auto;
+        background-color: #142653;
+
+        .analyze-date-table {
+          .ant-table-thead .ant-table-cell {
+            color: #34DCFC;
+            font-size: 16px;
+            background-color: #142653;
+            box-sizing: border-box;
+            padding: 0 initial;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+  
+          .ant-table-thead > tr > th {
+            border: none;
+          }
+  
+          .ant-table-tbody .ant-table-cell {
+            color: #fff;
+            font-size: 14px;
+            box-sizing: border-box;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+  
+          .ant-table-tbody tr:nth-child(2n) {
+            background-color: #061949;
+          }
+  
+          .ant-table-tbody tr:nth-child(2n + 1) {
+            background-color: #142653;
+          }
+  
+          .ant-table-tbody > tr > td {
+            border: none;
+          }
+  
+          .ant-table-tbody tr:hover {
+            & > td {
+              background-color: #1d3777!important;
+            }
+          }
+        }
+      }
     }
   }
 }

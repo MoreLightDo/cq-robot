@@ -19,36 +19,42 @@ export function getRealTimeInfo() {
       operationalStatus: '正常',
       abnormal: '电量不足',
       refRange: '10-100',
+      key: '01',
     },
     {
       indexNo: '02',
       operationalStatus: '正常',
       abnormal: '电量不足',
       refRange: '10-100',
+      key: '02',
     },
     {
       indexNo: '03',
       operationalStatus: '正常',
       abnormal: '电量不足',
       refRange: '10-100',
+      key: '03',
     },
     {
       indexNo: '04',
       operationalStatus: '正常',
       abnormal: '电量不足',
       refRange: '10-100',
+      key: '04',
     },
     {
       indexNo: '05',
       operationalStatus: '正常',
       abnormal: '电量不足',
       refRange: '10-100',
+      key: '05',
     },
     {
       indexNo: '06',
       operationalStatus: '正常',
       abnormal: '电量不足',
       refRange: '10-100',
+      key: '06',
     },
   ]);
 }
