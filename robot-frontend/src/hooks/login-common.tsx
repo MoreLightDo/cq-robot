@@ -1,17 +1,9 @@
-import { useState, useRef } from "react"
-import {login} from "../api/login";
+import { useState } from 'react';
 
 const LoginCommonHooks = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [isRemberPassword, setRemberPassword] = useState(false)
-  const isRequesting = useRef(false) // 预留接口调用拦截
-
-  const handleLogin = () => {
-    login(user,password).then(res=>{
-      console.log(res)
-    })
-  }
 
   return {
     user,
@@ -20,7 +12,6 @@ const LoginCommonHooks = () => {
     setUser,
     setPassword,
     setRemberPassword,
-    handleLogin
   }
 }
 

@@ -36,7 +36,7 @@ function LoginPage() {
 
     login(user.trim(), password.trim()).then((r: any) => {
       setToken(r.token)
-      getInfo().then(res => {
+      getInfo().then((res: unknown) => {
         dispatch(updateUser((res as UserResponse).user))
         history.push('/center')
       })
