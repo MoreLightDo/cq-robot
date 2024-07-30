@@ -3,7 +3,7 @@ import { Chart } from '@antv/g2';
 import { getRecentData } from '@/api/monitor';
 import './index.less';
 
-export default function SafeDataChart(props) {
+export default function HistoryLogChart(props) {
   const { className, style } = props;
   const containerRef = useRef(null);
 

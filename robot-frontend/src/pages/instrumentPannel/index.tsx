@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 import { getInstrumentState, getRealTimeInfo } from '@/api/panel';
 import history from '@/utils/history';
+import RuntimeTrendChart from '@/components/RuntimeTrendChart';
+import iconSrc from '@/assets/instrumentPage/OCR-icon.png';
 import settingIcon from '@/assets/center/setting.png';
 import stateIcon from '@/assets/instrumentPage/taskState.png';
 import locationIcon from '@/assets/instrumentPage/location.png';
@@ -19,6 +21,14 @@ export default function InstrumentPannel(props) {
   const [pannelState, setPannelState] = useState<any>({});
   const [realTimeInfo, setRealTimeInfo] = useState<any[]>([]);
 
+  // request({
+  //   url: '/robot_info',
+  //   method: 'post',
+  //   data: {
+  //     action: '上',
+  //     vel: 0,
+  //   },
+  // })
   useEffect(() => {
     getInstrumentState().then((res) => {
       setPannelState(res);
@@ -108,145 +118,133 @@ export default function InstrumentPannel(props) {
                 dataSource={realTimeInfo}
               />
             </div>
+            <div className='left-area-pannel' style={{ height: '313px', overflow: 'auto' }}>
+              <p className='title'>实时趋势</p>
+              {/* 实时信息内容 */}
+              <div className='runtime-chart'>
+                <RuntimeTrendChart />
+              </div>
+            </div>
           </div>
-          <div className='right-area'></div>
+          <div className='right-area'>
+            <img className='icon' src={iconSrc} />
+            <div className='ocr-list'>
+              {[1,2,3,4,5,6,7,8,9].map((_, i) => (
+                <div key={i} className='ocr-item'></div>
+              ))}
+            </div>
+          </div>
         </div>
         <div className='bottom-area'>
           <p className='title'>仪表分析</p>
           <div className='bottom-area-content'>
-          <Table
-            className='analyze-date-table'
-            bordered={false}
-            rowKey='indexNo'
-            scroll={{ y: 210 }}
-            columns={[
-              {
-                title: '序号',
-                dataIndex: 'indexNo',
-              },
-              {
-                title: '分析仪表',
-                dataIndex: 'yibiao',
-              },
-              {
-                title: '日期',
-                dataIndex: 'date',
-              },
-              {
-                title: '开始',
-                dataIndex: 'kaishi',
-              },
-              {
-                title: '结束',
-                dataIndex: 'jieshu',
-              },
-              {
-                title: '分析数',
-                dataIndex: 'num',
-              },
-              {
-                title: 'CaO',
-                dataIndex: 'CaO',
-              },
-              {
-                title: 'MgO',
-                dataIndex: 'MgO',
-              },
-              {
-                title: 'SkOz',
-                dataIndex: 'SkOz',
-              },
-              {
-                title: 'KzO',
-                dataIndex: 'KzO',
-              },
-              {
-                title: 'NazO',
-                dataIndex: 'NazO',
-              },
-            ]}
-            pagination={false}
-            dataSource={[
-              {
-                indexNo: 1,
-                yibiao: '5487654',
-                date: '2024-07-01',
-                kaishi: '2024-07-01 15:00',
-                jieshu: '2024-07-01 15:00',
-                num: 23,
-                CaO: 44,
-                MgO: 23,
-                SkOz: 23,
-                KzO: 23,
-                NazO: 12,
-              },
-              {
-                indexNo: 2,
-                yibiao: '5487654',
-                date: '2024-07-01',
-                kaishi: '2024-07-01 15:00',
-                jieshu: '2024-07-01 15:00',
-                num: 23,
-                CaO: 44,
-                MgO: 23,
-                SkOz: 23,
-                KzO: 23,
-                NazO: 12,
-              },
-              {
-                indexNo: 3,
-                yibiao: '5487654',
-                date: '2024-07-01',
-                kaishi: '2024-07-01 15:00',
-                jieshu: '2024-07-01 15:00',
-                num: 23,
-                CaO: 44,
-                MgO: 23,
-                SkOz: 23,
-                KzO: 23,
-                NazO: 12,
-              },
-              {
-                indexNo: 4,
-                yibiao: '5487654',
-                date: '2024-07-01',
-                kaishi: '2024-07-01 15:00',
-                jieshu: '2024-07-01 15:00',
-                num: 23,
-                CaO: 44,
-                MgO: 23,
-                SkOz: 23,
-                KzO: 23,
-                NazO: 12,
-              },
-              {
-                indexNo: 5,
-                yibiao: '5487654',
-                date: '2024-07-01',
-                kaishi: '2024-07-01 15:00',
-                jieshu: '2024-07-01 15:00',
-                num: 23,
-                CaO: 44,
-                MgO: 23,
-                SkOz: 23,
-                KzO: 23,
-                NazO: 12,
-              },
-              {
-                indexNo: 6,
-                yibiao: '5487654',
-                date: '2024-07-01',
-                kaishi: '2024-07-01 15:00',
-                jieshu: '2024-07-01 15:00',
-                num: 23,
-                CaO: 44,
-                MgO: 23,
-                SkOz: 23,
-                KzO: 23,
-                NazO: 12,
-              },
-            ]}
-          />
+            <Table
+              className='analyze-date-table'
+              bordered={false}
+              rowKey='indexNo'
+              scroll={{ y: 210 }}
+              columns={[
+                {
+                  title: '序号',
+                  dataIndex: 'indexNo',
+                },
+                {
+                  title: '分析仪表',
+                  dataIndex: 'yibiao',
+                },
+                {
+                  title: '日期',
+                  dataIndex: 'date',
+                },
+                {
+                  title: '开始',
+                  dataIndex: 'kaishi',
+                },
+                {
+                  title: '结束',
+                  dataIndex: 'jieshu',
+                },
+                {
+                  title: '分析数',
+                  dataIndex: 'num',
+                },
+                {
+                  title: 'CaO',
+                  dataIndex: 'CaO',
+                },
+                {
+                  title: 'MgO',
+                  dataIndex: 'MgO',
+                },
+                {
+                  title: 'SkOz',
+                  dataIndex: 'SkOz',
+                },
+                {
+                  title: 'KzO',
+                  dataIndex: 'KzO',
+                },
+                {
+                  title: 'NazO',
+                  dataIndex: 'NazO',
+                },
+              ]}
+              pagination={false}
+              dataSource={[
+                {
+                  indexNo: 1,
+                  yibiao: '5487654',
+                  date: '2024-07-01',
+                  kaishi: '2024-07-01 15:00',
+                  jieshu: '2024-07-01 15:00',
+                  num: 23,
+                  CaO: 44,
+                  MgO: 23,
+                  SkOz: 23,
+                  KzO: 23,
+                  NazO: 12,
+                },
+                {
+                  indexNo: 2,
+                  yibiao: '5487654',
+                  date: '2024-07-01',
+                  kaishi: '2024-07-01 15:00',
+                  jieshu: '2024-07-01 15:00',
+                  num: 23,
+                  CaO: 44,
+                  MgO: 23,
+                  SkOz: 23,
+                  KzO: 23,
+                  NazO: 12,
+                },
+                {
+                  indexNo: 3,
+                  yibiao: '5487654',
+                  date: '2024-07-01',
+                  kaishi: '2024-07-01 15:00',
+                  jieshu: '2024-07-01 15:00',
+                  num: 23,
+                  CaO: 44,
+                  MgO: 23,
+                  SkOz: 23,
+                  KzO: 23,
+                  NazO: 12,
+                },
+                {
+                  indexNo: 4,
+                  yibiao: '5487654',
+                  date: '2024-07-01',
+                  kaishi: '2024-07-01 15:00',
+                  jieshu: '2024-07-01 15:00',
+                  num: 23,
+                  CaO: 44,
+                  MgO: 23,
+                  SkOz: 23,
+                  KzO: 23,
+                  NazO: 12,
+                }
+              ]}
+            />
           </div>
         </div>
       </div>

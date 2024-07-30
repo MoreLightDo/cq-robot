@@ -10,6 +10,13 @@ import safeIcon from '@/assets/monitorPage/safe-icon.png';
 import history from '@/utils/history';
 import './index.less';
 
+// mock
+import src1 from '@/assets/videoMock/WX20240730-185629-1.png';
+import src2 from '@/assets/videoMock/WX20240730-185720-2.png';
+import src3 from '@/assets/videoMock/WX20240730-185749-3.png';
+
+const src = [src1, src2];
+
 export default function Instrument(props) {
   // 视频监控列表
   const [videoMonitorList, setVideoMonitorList] = useState([]);
@@ -92,7 +99,7 @@ export default function Instrument(props) {
             clickViewMore={viewMore.bind(null, '视频监控参数')}
           >
             <div className='video-list'>
-              {videoMonitorList.slice(0, 2).map((item) => (
+              {videoMonitorList.slice(0, 2).map((item, i) => (
                 <div className='video-item' key={item.videoUrl}>
                   <p>{item.name}</p>
                   <div
@@ -100,6 +107,7 @@ export default function Instrument(props) {
                     // 点击切换中间视频流
                     onClick={() => setCenterVideo(item.videoUrl)}
                   >
+                    <img style={{ display: 'block', width: '100%', height: '100%' }} src={src[i]} />
                     {/* 待完善视频流 */}
                   </div>
                 </div>
@@ -115,7 +123,11 @@ export default function Instrument(props) {
               {snapshotList[0] && (
                 <div className='video-item'>
                   <p>{snapshotList[0].name}</p>
-                  <div className='video-area'>
+                  <div className='video-area' style={{
+                    backgroundImage: `url(${src3})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: '100% 100%',
+                  }}>
                     <div className='video-info'>
                       <span>{snapshotList[0].tip}</span>
                       <span>{snapshotList[0].time}</span>

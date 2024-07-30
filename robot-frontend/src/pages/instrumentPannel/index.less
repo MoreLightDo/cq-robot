@@ -185,12 +185,52 @@
       }
     }
 
-    .right-area {
+    .runtime-chart {
+      margin-top: 30px;
+      height: calc(100% - 50px);
+    }
 
+    .right-area {
+      flex: 1;
+      background-image: url('@/assets/instrumentPage/ocr-background.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      margin-left: 30px;
+      margin-bottom: 10px;
+      padding: 60px 60px 0;
+      position: relative;
+
+      .icon {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+      }
+
+      .ocr-list {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .ocr-item {
+        width: calc((100% - 40px) / 3);
+        height: 200px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #00BDFF;
+        background-image: url('@/assets/videoMock/WX20240730-205556-5.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+
+        &:nth-child(3n) {
+          margin-right: 0;
+        }
+      }
     }
 
     .bottom-area {
-      height: 300px;
+      height: 265px;
       background-image: url('../../assets/instrumentPage/analyze.png');
       background-size: 99% calc(100% - 15px);
       background-repeat: no-repeat;

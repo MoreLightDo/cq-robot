@@ -1,0 +1,437 @@
+.intelligent-page {
+  height: calc(100vh);
+  background-image: url('@/assets/common/app-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+
+  // -------------------- 本页面antd部分样式重写 START -------------------
+  .btns {
+    min-width: 300px;
+
+    button {
+      margin-right: 20px;
+      width: 100px;
+      border-radius: 3px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .ant-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .ant-form-item {
+    width: 200px;
+    margin-right: 23px;
+  }
+
+  .ant-input {
+    background-color: #051667;
+    border-color: #228DB2;
+    color: #fff;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 50%);
+    }
+  }
+
+  .ant-select-selector {
+    background-color: #051667!important;
+    border-color: #228DB2!important;
+    color: #fff!important;
+
+    .ant-select-selection-placeholder {
+      color: rgba(255, 255, 255, 50%)!important;
+    }
+  }
+
+  .ant-select-arrow {
+    color: rgba(255, 255, 255, 50%);
+  }
+
+  .ant-picker {
+    background-color: #051667;
+    border-color: #228DB2;
+    color: #fff;
+
+    .ant-picker-input > input {
+      color: #fff;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 50%);
+      }
+    }
+
+    .ant-picker-suffix {
+      color: rgba(255, 255, 255, 50%);
+    }
+  }
+
+  .ant-form-item-label > label {
+    color: #34DCFC;
+  }
+  // -------------------- 本页面antd部分样式重写 End -------------------
+
+  .page-button {
+    display: inline-block;
+    line-height: 30px;
+    color: #fff;
+    padding: 0 14px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #092483;
+    font-size: 16px;
+    cursor: pointer;
+  
+    &:hover {
+      color: #00BDFF;
+    }
+  
+    &:active {
+      color: #0f5eb2;
+    }
+  }
+
+  .intelligent-page-header {
+    height: 93px;
+    background-image: url('@/assets/monitorPage/monitor-header.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px 30px 20px 20px;
+    box-sizing: border-box;
+    background-position: 50%;
+    display: flex;
+
+    .header-left-elements{
+      margin-left: 20px;
+      height: 30px;
+      line-height: 30px;
+
+      .data-and-time-item {
+        margin-right: 40px;
+        color: #00BDFF;
+        font-size: 16px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .header-right-elements {
+      margin-left: auto;
+      height: 30px;
+      line-height: 30px;
+
+      a {
+        margin-left: 10px;
+      }
+
+      .setting-icon {
+        margin-left: 28px;
+        width: 22px;
+        height: 22px;
+        vertical-align: text-top;
+      }
+    }
+  }
+
+  .intelligent-page-table {
+    overflow: auto;
+
+    .ant-pagination-item-link {
+      border-color: #34DCFC;
+    }
+
+    .ant-pagination-disabled .ant-pagination-item-link {
+      color: #34DCFC;
+    }
+
+    .ant-pagination-item {
+      background-color: #051667;
+      border-color: #34DCFC;
+
+      a {
+        color: #34DCFC;
+      }
+    }
+
+    .ant-pagination-item-active {
+      background-color: #34DCFC;
+
+      a {
+        color: #fff;
+      }
+    }
+
+    .ant-pagination-prev > button {
+      background-color: #051667;
+      color: #34DCFC;
+    }
+
+    .ant-pagination-next > button {
+      background-color: #051667;
+      color: #34DCFC;
+    }
+
+    .ant-table-thead .ant-table-cell {
+      color: #34DCFC;
+      font-size: 16px;
+      background-color: #142653;
+      box-sizing: border-box;
+      padding: 0 initial;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .ant-table-thead > tr > th {
+      border: none;
+    }
+
+    .ant-table-tbody .ant-table-cell {
+      color: #fff;
+      font-size: 14px;
+      box-sizing: border-box;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .ant-table-tbody tr:nth-child(2n + 1) {
+      background-color: #061949;
+    }
+
+    .ant-table-tbody tr:nth-child(2n) {
+      background-color: #142653;
+    }
+
+    .ant-table-tbody > tr > td {
+      border: none;
+    }
+
+    .ant-table-tbody tr:hover {
+      & > td {
+        background-color: #1d3777!important;
+      }
+    }
+  }
+
+  .intelligent-page-body {
+    margin-top: 35px;
+    overflow: auto;
+    flex: 1;
+    padding: 0 20px;
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex-basis: 700px;
+      margin-left: 27px;
+    }
+
+    .left,.right {
+      background-image: url('../../assets/instrumentPage/backgroundBorder.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      position: relative;
+      overflow: auto;
+
+      .title {
+        position: absolute;
+        left: 40px;
+        top: 0;
+        font-size: 20px;
+        line-height: 30px;
+        color: #34DCFC;
+        margin: 0;
+      }
+    }
+
+    .upper {
+      height: 530px;
+      display: flex;
+      margin-bottom: 40px;
+
+      .content {
+        margin-top: 30px;
+        height: calc(100% - 30px);
+        overflow: auto;
+        padding: 23px 20px 18px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .robot-log {
+        margin-top: 30px;
+        height: calc(100% - 30px);
+        padding: 40px 49px 56px 39px;
+
+        .label {
+          margin-top: 4px;
+          font-size: 14px;
+          color: rgba(255, 255, 255, 60%);
+        }
+
+        .value {
+          color: #34DCFC;
+          font-size: 24px;
+          font-weight: 400;
+        }
+      }
+
+      .robot-log-content {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 55px;
+      }
+
+      .label-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .robot-maintenance {
+        width: 100%;
+        height: 270px;
+        border: 1px #228DB2 solid;
+        background-color: #051667;
+        display: flex;
+
+        .maintenance-icon {
+          width: 166px;
+          height: 196px;
+          border-right: 1px solid #228DB2;
+          margin-top: 40px;
+          background-image: url('../../assets/common/maintenance.png');
+          background-size: 86px 94px;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+
+        .maintenance-content {
+          flex: 1;
+          padding-left: 38px;
+          padding-right: 43px;
+          padding-top: 41px;
+          position: relative;
+
+          .percent {
+            position: absolute;
+            right: 43px;
+            top: 41px;
+            font-size: 30px;
+            color: #05D8EF;
+          }
+
+          .maintenance-title {
+            font-size: 24px;
+            color: #fff;
+            line-height: 47px;
+          }
+
+          .progress {
+            margin-top: 20px;
+            background-color: #030F4B;
+
+            & > div {
+              height: 8px;
+              width: 50%;
+              border-radius: 4px;
+              background: linear-gradient(90deg, #34DCFC 0%, #FFFFFF 100%);
+            }
+          }
+
+          .maintenance-info {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+          }
+
+          .maintenance-btns {
+            button {
+              margin-right: 12px;
+              border-radius: 3px;
+              width: 100px;
+            }
+
+            .white:active {
+              border-color: #fff;
+              color: #fff;
+            }
+
+            .white:focus {
+              border-color: #fff;
+              color: #fff;
+            }
+
+            .blue {
+              border-color: #40a9ff;
+              color: #40a9ff;
+
+              &:active {
+                border-color: #40a9ff!important;
+                color: #40a9ff!important;
+              }
+
+              &:focus {
+                border-color: #40a9ff!important;
+                color: #40a9ff!important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .lower {
+      height: 440px;
+      display: flex;
+
+      .btns {
+        min-width: 220px;
+      }
+
+      .content {
+        margin-top: 30px;
+        height: calc(100% - 30px);
+        overflow: auto;
+        padding: 23px 20px 18px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      form {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .history {
+        margin-top: 30px;
+        height: calc(100% - 30px);
+
+        form {
+          padding-top: 22px;
+        }
+      }
+    }
+  }
+
+  .table1 {
+    flex: 1;
+  }
+}
