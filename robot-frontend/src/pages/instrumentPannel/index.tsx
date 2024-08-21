@@ -17,6 +17,16 @@ import './index.less';
   // history.push(path);
 };
 
+
+// import request from '@/utils/request';
+
+// request({
+//   url: '/robot_info',
+//   method: 'get',
+// }).then(res => {
+//   console.log(res);
+// });
+
 export default function InstrumentPannel(props) {
   const [pannelState, setPannelState] = useState<any>({});
   const [realTimeInfo, setRealTimeInfo] = useState<any[]>([]);

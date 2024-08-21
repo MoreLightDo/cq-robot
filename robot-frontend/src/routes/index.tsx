@@ -18,16 +18,16 @@ export default function RootRoute() {
       <Router history={history}>
         <React.Suspense fallback={<div>loading...</div>}>
           <Routes>
-            {/* <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/password" element={<EditPassword />} />
-            <Route path="/center" element={<CenterPage />} /> */}
+            <Route path="/center" element={<CenterPage />} />
             {/* 仪表识别页面 */}
             <Route path="/instrument" element={<InstrumentPannel />} />
             {/* 监控平台页面 */}
             <Route path="/monitorPlatform" element={<MonitorPlatForm />} />
             {/* 智能运维页面 */}
             <Route path="/intelligentOps" element={<IntelligentOps />} />
-            {/* <Route path="/" element={<Login />} /> */}
+            <Route path="/" element={<Login />} />
           </Routes>
         </React.Suspense>
       </Router>

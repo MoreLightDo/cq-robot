@@ -21,12 +21,12 @@ module.exports = merge(common, {
       publicPath: '/dist',
     },
     proxy: {
-      '/': {
-        target: 'http://47.120.19.177:8080/',  // 任航
-        changeOrigin: true,
-      },
+      // '/': {
+      //   target: 'http://47.120.19.177:8080/',  // 任航
+      //   changeOrigin: true,
+      // },
       '/cqrobot': {
-        target: 'http://81.70.48.42:7981',        // 二期联调
+        target: 'http://81.70.48.42:7810/',        // 二期联调
         changeOrigin: true,
         pathRewrite: { '^/cqrobot': '' },
       },
